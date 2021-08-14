@@ -56,7 +56,7 @@ const resolvers = {
                     { new: true, runValidators: true }
                 );
 
-                return args;
+                return updatedBooks;
             }
 
             throw new AuthenticationError('You need to be logged in!');
