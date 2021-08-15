@@ -22,7 +22,7 @@ const SavedBooks = () => {
 
       cache.writeQuery({
         query: GET_ME,
-        data: { me: { ...me, savedBooks: newBooklist } }
+        data: { ...me, savedBooks: newBooklist }
       })
     }
   });
@@ -34,17 +34,9 @@ const SavedBooks = () => {
       await removeBook({
         variables: { bookId }
       })
-      // const response = await deleteBook(bookId, token);
-
-      // if (!response.ok) {
-      //   throw new Error('something went wrong!');
-      // }
-
-      // const updatedUser = await response.json();
-      // setUserData(updatedUser);
-      // // upon success, remove book's id from localStorage
       removeBookId(bookId);
-    } catch (err) {
+    } 
+    catch (err) {
       console.error(err);
     }
   };
@@ -63,12 +55,12 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${userData.savedBooks.length === 1 ? 'book' : 'books'}:`
+          {userData.me.bookCount
+            ? (`Viewing ${userData.me.bookCount} saved ${userData.me.bookCount === 1 ? 'book' : 'books'}:`)
             : 'You have no saved books!'}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData.me.savedBooks.map((book) => {
             return (
               <Card key={book.bookId} border='dark'>
                 {book.image ? <Card.Img src={book.image} alt={`The cover for ${book.title}`} variant='top' /> : null}
